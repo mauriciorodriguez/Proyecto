@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listado de Items
+{% endblock %}
+
+{% block content %}
+<table>
+    <caption>
+        Items 
+    </caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Proyecto</th>
+    </tr>
+    <tr>
+        {% for i in items %}
+            <tr>
+                <td><a href="{% url "detalle-item" pk=i.id %}">{{ i }}</a></td>
+                <td>{{ i.descripcion }}</td>
+                <td><a href="{% url "detalle-proyecto" pk=i.proyecto_id %}">{{ i.proyecto }}</a></td>
+            </tr>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}

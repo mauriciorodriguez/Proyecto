@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listado de Proyectos
+{% endblock %}
+
+{% block content %}
+<table>
+    <caption>
+        Proyectos 
+    </caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+    </tr>
+    <tr>
+        {% for p in proyectos %}
+    <tr>
+        <td><a href="{% url "detalle-proyecto" pk=p.id %}">{{ p.nombre }}</a></td>
+        <td>{{ p.descripcion }}</td>
+    </tr>
+    {% endfor %}
+    </tr>
+</table>
+{% endblock %}

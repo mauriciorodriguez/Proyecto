@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ proyecto.nombre }}
+{% endblock %}
+
+{% block content %}
+<a href="{% url "editar-proyecto" pk=proyecto.id %}">
+    <button type="button" class="btn btn-success">Editar</button>
+</a>
+<a href="{% url "borrar-proyecto" pk=proyecto.id %}">
+    <button type="button" class="btn btn-danger">Eliminar</button>
+</a>
+<table>
+    <caption>
+        Integrantes de "{{ proyecto.nombre }}"
+    </caption>
+    <tr>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>email</th>
+        <th>Rol</th>
+    </tr>
+    <tr>
+        {% for u in roles %}
+            <tr>
+                <td>{{ u.usuario.user.last_name }}, {{ u.usuario.user.first_name }}</td>
+                <td>{{ u.usuario.dni }}</td>
+                <td>{{ u.usuario.user.email }}</td>
+                <td><a href="{% url "rol-usuario" pk=u.id %}">{{ u.get_rol_display }}</a></td>
+            </tr>
+        {% endfor %}
+    </tr>
+</table>
+<table>
+    <caption>
+        Items de "{{ proyecto.nombre }}"
+    </caption>
+    <tr>
+        <th>Tipo</th>
+        <th>Descripcion</th>
+        <th>Responsable</th>
+        <th>Estado actual</th>
+    </tr>
+    <tr>
+        {% for i in items %}
+            <tr>
+                <td><a href="{% url "detalle-item" pk=i.id %}">{{ i.tipo.nombre }}</a></td>
+                <td>{{ i.descripcion }}</td>
+                <td>{{ i.estado_set.last.responsables.last.dni }} {{ i.estado_set.last.responsables.last.user.last_name }}, {{ i.estado_set.last.responsables.last.user.first_name }}</td>
+                <td>{{ i.estado_set.last.nombre }}</td>
+            </tr>
+        {% endfor %}        
+    </tr>
+</table>
+{% endblock %}

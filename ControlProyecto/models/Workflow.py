@@ -5,7 +5,7 @@ class Workflow(models.Model):
     inicial = models.BooleanField()
     nombre = models.CharField(max_length=32)
     descripcion = models.TextField(null=True)
-    siguientes = models.ManyToManyField("self", blank=True)
+    siguientes = models.ManyToManyField("self", blank=True, symmetrical=False)
     def __str__(self):           
         return self.nombre
     

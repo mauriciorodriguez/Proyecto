@@ -15,7 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
+from ControlProyecto.views import indexView, ProyectoListView, ProyectoCreateView, ProyectoView, ProyectoUpdateView, ProyectoDeleteView, ItemView, ItemCreateView, ItemUpdateView, ItemDeleteView, ItemListView
+from ControlProyecto.views.RolView import RolUpdateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', indexView.as_view(), name="inicio"),
+    path('proyectos/', ProyectoListView.as_view(), name="listado-proyecto"),
+    path('proyectos/<int:pk>/', ProyectoView.as_view(), name="detalle-proyecto"),    
+    path('proyectos/<int:pk>/editar/', ProyectoUpdateView.as_view(), name="editar-proyecto"),
+    path('proyectos/<int:pk>/borrar/', ProyectoDeleteView.as_view(), name="borrar-proyecto"),
+    path('proyectos/crear/', ProyectoCreateView.as_view(), name="crear-proyecto"),
+    path('item/crear/', ItemCreateView.as_view(), name="crear-item"),
+    path('item/<int:pk>/', ItemView.as_view(), name="detalle-item"),
+    path('item/<int:pk>/editar/', ItemUpdateView.as_view(), name="editar-item"),
+    path('item/<int:pk>/borrar/', ItemDeleteView.as_view(), name="borrar-item"),
+    path('item/', ItemListView.as_view(), name="listado-item"),
+    path('rol/<int:pk>/', RolUpdateView.as_view(), name="rol-usuario"),
+    
 ]

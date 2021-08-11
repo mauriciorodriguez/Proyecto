@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ estados.first.item.tipo.nombre }}
+{% endblock %}
+
+{% block content %}
+<a href="{% url "editar-item" pk=estados.first.item.id %}">
+    <button type="button" class="btn btn-success">Editar</button>
+</a>
+<a href="{% url "borrar-item" pk=estados.first.item.id %}">
+    <button type="button" class="btn btn-danger">Eliminar</button>
+</a>
+<table>
+    <caption>
+        Item "{{ estados.first.item.tipo.nombre }}"
+    </caption>
+    <tr>
+        <th>Estado</th>
+        <th>Responsables</th>
+        <th>Fecha</th>
+    </tr>
+    <tr>
+        {% for e in estados %}
+        <tr>
+            <td>{{ e.nombre }}</td>
+            <td>
+            {% for r in e.responsablesestado_set.all%}
+               {{ r.usuario }}
+               <br>
+            {% endfor %}
+            </td>  
+            <td>
+            {% for r in e.responsablesestado_set.all%}
+               {{ r.fecha }}
+               <br>
+            {% endfor %}
+            </td>        
+        </tr>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}
