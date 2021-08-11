@@ -8,7 +8,8 @@ TPIntegrador - Laboratorio de programacion y lenguajes - PyDevDjango
  - ABML de usuarios (solo administrador) 
  - ABML de tipos de ítems (solo administrador)
  - ABML de proyectos
- - ABML de ítems Creación y modificación de workflows
+ - ABML de ítems 
+ - Creación y modificación de workflows
  - Asignación de usuarios a un proyecto
  - Asignación de roles a los usuarios de un proyecto
  - Listado de proyectos del usuario, agrupados por el rol que desempeña en cada uno
