@@ -11,7 +11,7 @@
 <a href="{% url "borrar-item" pk=estados.first.item.id %}">
     <button type="button" class="btn btn-danger">Eliminar</button>
 </a>
-{% if user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
+{% if user.is_authenticated and user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
     <a href="{% url "crear-estado" %}">
         <button type="button" class="btn btn-success">Crear nuevo estado</button>
     </a>
@@ -28,7 +28,7 @@
     <tr>
         {% for e in estados %}
         <tr>
-            {% if user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
+            {% if user.is_authenticated and user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
                 <td><a href="{% url "editar-estado" pk=e.id %}">{{ e }}</a></td>
             {% else %}
                 <td>{{ e }}</td>
@@ -38,7 +38,7 @@
                <a href="{% url "editar-responsable" pk=r.id %}">{{ r.usuario }}</a>
                <br>
             {% endfor %}
-            {% if forloop.last %}
+            {% if forloop.last and user.is_authenticated and user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
                 <a href="{% url "crear-responsable" %}">
                     <button type="button" class="btn btn-success btn-sm">Nuevo responsable</button>
                 </a>
