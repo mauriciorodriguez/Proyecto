@@ -9,7 +9,7 @@ class Item(models.Model):
     def get_absolute_url(self):
         return reverse('detalle-item', kwargs={'pk': self.pk})
     def __str__(self):
-        return self.tipo.nombre
+        return str(self.pk) + ": " + self.tipo.nombre
     
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):

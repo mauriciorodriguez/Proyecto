@@ -24,7 +24,7 @@
     <tr>
         {% for u in roles %}
             <tr>
-                <td>{{ u.usuario.user.last_name }}, {{ u.usuario.user.first_name }}</td>
+                <td><a href="{% url "detalle-usuario" pk=u.usuario.id %}">{{ u.usuario.user.last_name }}, {{ u.usuario.user.first_name }}</a></td>
                 <td>{{ u.usuario.dni }}</td>
                 <td>{{ u.usuario.user.email }}</td>
                 <td><a href="{% url "rol-usuario" pk=u.id %}">{{ u.get_rol_display }}</a></td>

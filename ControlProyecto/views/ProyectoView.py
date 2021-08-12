@@ -15,7 +15,7 @@ class ProyectoView(TemplateView):
 
 class ProyectoCreateView(CreateView):
     model = Proyecto
-    fields = ["nombre", "descripcion"]
+    fields = ["nombre", "item"]
     template_name = "form_proyecto.html"
     success_url = reverse_lazy('listado-proyecto')
 

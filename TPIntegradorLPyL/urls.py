@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from ControlProyecto.views import indexView, ProyectoListView, ProyectoCreateView, ProyectoView, ProyectoUpdateView, ProyectoDeleteView, ItemView, ItemCreateView, ItemUpdateView, ItemDeleteView, ItemListView
-from ControlProyecto.views.RolView import RolUpdateView
+from ControlProyecto.views import indexView, ProyectoListView, ProyectoCreateView, ProyectoView, ProyectoUpdateView, ProyectoDeleteView, ItemView, ItemCreateView, ItemUpdateView, ItemDeleteView, ItemListView, WorkflowCreateView, WorkflowListView, RolUpdateView, WorkflowUpdateView, UsuarioListView, UsuarioView, EstadoCreateView, EstadoUpdateView
+from ControlProyecto.views.ResponsableView import ResponsableUpdateView,\
+    ResponsableCreateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +36,13 @@ urlpatterns = [
     path('item/<int:pk>/borrar/', ItemDeleteView.as_view(), name="borrar-item"),
     path('item/', ItemListView.as_view(), name="listado-item"),
     path('rol/<int:pk>/', RolUpdateView.as_view(), name="rol-usuario"),
-    
+    path('workflow/crear/', WorkflowCreateView.as_view(), name="crear-workflow"), 
+    path('workflow/<int:pk>/editar/', WorkflowUpdateView.as_view(), name="editar-workflow"), 
+    path('workflow/', WorkflowListView.as_view(), name="listado-workflow"),  
+    path('usuario/', UsuarioListView.as_view(), name="listado-usuario"), 
+    path('usuario/<int:pk>/', UsuarioView.as_view(), name="detalle-usuario"), 
+    path('estado/crear', EstadoCreateView.as_view(), name="crear-estado"), 
+    path('estado/<int:pk>/editar/', EstadoUpdateView.as_view(), name="editar-estado"),
+    path('responsable/<int:pk>/editar/', ResponsableUpdateView.as_view(), name="editar-responsable"),
+    path('responsable/crear', ResponsableCreateView.as_view(), name="crear-responsable"),
 ]

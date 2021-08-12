@@ -11,9 +11,14 @@
 <a href="{% url "borrar-item" pk=estados.first.item.id %}">
     <button type="button" class="btn btn-danger">Eliminar</button>
 </a>
+{% if user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
+    <a href="{% url "crear-estado" %}">
+        <button type="button" class="btn btn-success">Crear nuevo estado</button>
+    </a>
+{% endif %}
 <table>
     <caption>
-        Item "{{ estados.first.item.tipo.nombre }}"
+        Item "{{ estados.first.item}}"
     </caption>
     <tr>
         <th>Estado</th>
@@ -23,12 +28,21 @@
     <tr>
         {% for e in estados %}
         <tr>
-            <td>{{ e.nombre }}</td>
+            {% if user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
+                <td><a href="{% url "editar-estado" pk=e.id %}">{{ e }}</a></td>
+            {% else %}
+                <td>{{ e }}</td>
+            {% endif %}
             <td>
             {% for r in e.responsablesestado_set.all%}
-               {{ r.usuario }}
+               <a href="{% url "editar-responsable" pk=r.id %}">{{ r.usuario }}</a>
                <br>
             {% endfor %}
+            {% if forloop.last %}
+                <a href="{% url "crear-responsable" %}">
+                    <button type="button" class="btn btn-success btn-sm">Nuevo responsable</button>
+                </a>
+            {% endif %}
             </td>  
             <td>
             {% for r in e.responsablesestado_set.all%}

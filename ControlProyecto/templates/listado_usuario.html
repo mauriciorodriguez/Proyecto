@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listado de Usuarios
+{% endblock %}
+
+{% block content %}
+<table>
+    <caption>
+        Usuarios 
+    </caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+    </tr>
+    <tr>
+        {% for i in usuarios %}
+            <tr>
+                <td><a href="{% url "detalle-usuario" pk=i.id %}">{{ i.user.first_name }}</a></td>
+                <td>{{ i.user.last_name }}</td>
+                <td>{{ i.dni }}</a></td>
+            </tr>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}

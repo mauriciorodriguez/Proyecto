@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ usuario.user.last_name }} {{ usuario.user.first_name }}
+{% endblock %}
+
+{% block content %}
+<table>
+    <caption>
+        {{ usuario.user.last_name }}, {{ usuario.user.first_name }}
+    </caption>
+    <tr>
+        <th>Proyecto</th>
+        <th>Rol</th>
+    </tr>
+    <tr>
+        {% for u in usuario.rolusuario_set.all %}
+        <tr>
+            <td><a href="{% url "detalle-proyecto" pk=u.proyecto.id %}">{{ u.proyecto.nombre }}</a></td>
+            <td><a href="{% url "rol-usuario" pk=u.id %}">{{ u.get_rol_display }}</a></td>        
+        </tr>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock %}

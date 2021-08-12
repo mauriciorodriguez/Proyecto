@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listado de Workflows
+{% endblock %}
+
+{% block content %}
+<table>
+    <caption>
+        Workflows 
+    </caption>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Siguientes</th>
+    </tr>
+    <tr>
+        {% for w in workflows %}
+        <tr>
+            <td><a href="{% url "editar-workflow" pk=w.id %}">{{ w.nombre }}</a></td>
+            <td>{{ w.descripcion }}</td>
+            <td>
+                {% for s in w.siguientes.all %}
+                    - <a href="{% url "editar-workflow" pk=s.id %}">{{ s.nombre }}</a>
+                    <br>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tr>
+</table>
+{% endblock %}
