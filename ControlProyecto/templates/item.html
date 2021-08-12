@@ -35,8 +35,13 @@
             {% endif %}
             <td>
             {% for r in e.responsablesestado_set.all%}
-               <a href="{% url "editar-responsable" pk=r.id %}">{{ r.usuario }}</a>
-               <br>
+                {% if user.is_authenticated and user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
+                    <a href="{% url "editar-responsable" pk=r.id %}">{{ r.usuario }}</a>
+                    <br>
+                {% else %}
+                    {{ r.usuario }}
+                    <br>
+                {% endif %}
             {% endfor %}
             {% if forloop.last and user.is_authenticated and user.usuario.id == estados.last.responsablesestado_set.last.usuario.id %}
                 <a href="{% url "crear-responsable" %}">
